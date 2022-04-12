@@ -6,11 +6,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>find a correct spelling</title>
     <link rel="stylesheet" href="style.css" />
-    <script defer src="../src/index.js"></script>
     <audio class="backgroundMusic" src="./bg.mp3" loop="True"></audio>
+    <script defer src="../src/index.js"></script>
+    <script
+      src="https://kit.fontawesome.com/33a680d257.js"
+      crossorigin="anonymous"
+    ></script>
   </head>
   <body>
-    <div id="root"></div>
+    <div class="container">
+      <div class="title-bar">
+        <div class="title prevent-select draggable">Custom Title Bar</div>
+        <div class="control prevent-select">
+          <button id="min">
+            <i class="fa fa-window-minimize"></i>
+          </button>
+          <button id="max">
+            <i class="fa fa-window-maximize"></i>
+          </button>
+          <button id="close">
+            <i class="fa fa-window-close"></i>
+          </button>
+        </div>
+      </div>
+      <div id="root"></div>
+    </div>
     <script src="../src/function.js"></script>
   </body>
 </html>
