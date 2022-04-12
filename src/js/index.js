@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDom from "react-dom";
+import App2 from "../../build/js/App2";
 
 const domContainer = document.querySelector("#root");
-ReactDom.render(<h2>리액트 추가</h2>, domContainer);
+ReactDom.render(<App2 />, domContainer);
