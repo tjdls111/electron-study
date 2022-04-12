@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 function Game() {
   const [now, setNow] = useState("Start🍒");
+  const [cnt, setCnt] = useState(0);
+  const [timer, setTimer] = useState(60);
   function getRandomNum(min, max) {
     return Math.random() * (max - min) + min;
   }
@@ -11,7 +13,6 @@ function Game() {
     const yPos = getRandomNum(150, window.innerHeight - imgHeight);
     img.style.transform = `translate(${xPos}px, ${yPos}px)`;
     img.style.display = "inline";
-    // console.log(`${xPos}, ${yPos}`);
   }
 
   const onStart = (event) => {
@@ -24,27 +25,17 @@ function Game() {
     }
   };
 
-  let timer = document.querySelector(".timer");
-
-  function countDown(timeLimit) {
-    let time = timeLimit;
-
+  function countDown() {
     let interval = setInterval(() => {
-      if (time < 0) {
+      if (timer < 0) {
         timer.innerHTML = "Game Over";
         ifLose();
         clearInterval(interval);
       } else {
-        timer.innerHTML = `${time}초`;
-        time--;
+        let tmp_timer = timer - 1;
+        setTimer(tmp_timer);
       }
     }, 1000);
-  }
-
-  function checkWin(correctNum, cnt) {
-    if (correctNum == cnt) {
-      ifWin();
-    }
   }
 
   function ifWin() {
@@ -67,8 +58,6 @@ function Game() {
     }
   }
 
-  const game_zone = document.querySelector(".gameZone");
-
   function start() {
     let music = document.querySelector(".backgroundMusic");
     music.play();
@@ -80,22 +69,21 @@ function Game() {
       randomPosition(i, 200, 200);
     }
 
-    countDown(60);
-
-    let cnt = 0;
-
-    game_zone.addEventListener("click", (event) => {
-      if (event.target.className == "False") {
-        timer.innerHTML = "Game Over";
-        ifLose();
-      } else if (event.target.className == "True") {
-        cnt += 1;
-        // console.log(event);
-        event.target.remove();
-        checkWin(4, cnt);
-      }
-    });
+    countDown();
   }
+  const onClickGameZone = (event) => {
+    if (event.target.className == "False") {
+      setTimer("Game Over");
+      ifLose();
+    } else if (event.target.className == "True") {
+      if (3 === cnt) {
+        ifWin();
+      }
+      let tmp_cnt = cnt + 1;
+      setCnt(tmp_cnt);
+      event.target.remove();
+    }
+  };
 
   return (
     <>
@@ -103,10 +91,10 @@ function Game() {
         <button className="start_end_Btn" onClick={onStart}>
           {now}
         </button>
-        <div className="timer">60초</div>
+        <div className="timer">{timer}</div>
       </header>
 
-      <div className="gameZone">
+      <div className="gameZone" onClick={onClickGameZone}>
         <img className="False" defer src="/image/1F.png" alt="" />
         <img src="/image/2F.png" alt="" className="False" defer />
         <img src="/image/3F.png" alt="" className="False" defer />
