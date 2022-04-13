@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 function Game() {
   const [now, setNow] = useState("Start🍒");
@@ -93,7 +93,6 @@ function Game() {
         </button>
         <div className="timer">{timer}</div>
       </header>
-
       <div className="gameZone" onClick={onClickGameZone}>
         <img className="False" defer src="/image/1F.png" alt="" />
         <img src="/image/2F.png" alt="" className="False" defer />
