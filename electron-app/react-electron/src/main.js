@@ -1,11 +1,4 @@
-const {
-  app,
-  BrowserWindow,
-  Menu,
-  shell,
-  ipcMain,
-  mainWindow,
-} = require("electron");
+const { app, BrowserWindow, Menu, shell, ipcMain } = require("electron");
 const path = require("path");
 const { SEND_CLOSE, SEND_MAX, SEND_MIN } = require("./constants");
 
@@ -44,24 +37,23 @@ function createWindow() {
   // ];
   // const menu = Menu.buildFromTemplate(template);
   // Menu.setApplicationMenu(menu);
+  ipcMain.on(SEND_MIN, (event, arg) => {
+    win.minimize();
+  });
+
+  ipcMain.on(SEND_MAX, (event, arg) => {
+    if (win.isMaximized()) {
+      win.restore();
+    } else {
+      win.maximize();
+    }
+  });
+
+  ipcMain.on(SEND_CLOSE, (event, arg) => {
+    win.close();
+  });
   win.loadURL("http://localhost:3000");
 }
-ipcMain.on(SEND_MIN, (event, arg) => {
-  console.log("mini");
-  mainWindow.minimize();
-});
-
-ipcMain.on(SEND_MAX, (event, arg) => {
-  if (mainWindow.isMaximized()) {
-    mainWindow.restore();
-  } else {
-    mainWindow.maximize();
-  }
-});
-
-ipcMain.on(SEND_CLOSE, (event, arg) => {
-  mainWindow.close();
-});
 app.whenReady().then(() => {
   createWindow();
 });
