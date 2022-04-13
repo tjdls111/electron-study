@@ -1,3 +1,5 @@
 module.exports = { 
-    SEND_MAIN_PING: 'send_main_ping', 
+    SEND_MIN : 'minimizeApp',
+    SEND_MAX : 'maximizeApp',
+    SEND_CLOSE : 'closeApp',
 };

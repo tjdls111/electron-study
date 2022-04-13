@@ -2,19 +2,21 @@ import React from "react";
 
 function Button() {
   const { ipcRenderer } = window.require("electron");
-
+  const { 
+    SEND_CLOSE, SEND_MAX, SEND_MIN 
+  } = require('./constants'); 
   //   const sendMail = () => {
   //     ipcRenderer.send(SEND_MAIN_PING, "send");
   //   };
 
   const onMinBtn = () => {
-    ipcRenderer.send("minimizeApp", "send");
+    ipcRenderer.send(SEND_MIN, "send");
   };
   const onMaxBtn = () => {
-    ipcRenderer.send("maximizeApp", "send");
+    ipcRenderer.send(SEND_MAX, "send");
   };
   const onCloseBtn = () => {
-    ipcRenderer.send("closeApp", "send");
+    ipcRenderer.send(SEND_CLOSE, "send");
   };
 
   return (

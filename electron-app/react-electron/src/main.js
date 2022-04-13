@@ -7,6 +7,7 @@ const {
   mainWindow,
 } = require("electron");
 const path = require("path");
+const { SEND_CLOSE, SEND_MAX, SEND_MIN } = require("./constants");
 
 function createWindow() {
   const win = new BrowserWindow({
@@ -45,12 +46,12 @@ function createWindow() {
   // Menu.setApplicationMenu(menu);
   win.loadURL("http://localhost:3000");
 }
-ipcMain.on("minimizeApp", () => {
+ipcMain.on(SEND_MIN, (event, arg) => {
   console.log("mini");
   mainWindow.minimize();
 });
 
-ipcMain.on("maximizeApp", () => {
+ipcMain.on(SEND_MAX, (event, arg) => {
   if (mainWindow.isMaximized()) {
     mainWindow.restore();
   } else {
@@ -58,7 +59,7 @@ ipcMain.on("maximizeApp", () => {
   }
 });
 
-ipcMain.on("closeApp", () => {
+ipcMain.on(SEND_CLOSE, (event, arg) => {
   mainWindow.close();
 });
 app.whenReady().then(() => {
