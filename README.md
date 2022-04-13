@@ -6,7 +6,7 @@ Studying electron
 - 참고한 자료: [공식 문서](https://www.electronjs.org/docs/latest/tutorial/process-model), [코드 기어님의 일렉트론 강의](https://codegear.tistory.com/10)
 
 ### 실행 방법
-프론트엔드 폴더로 이동: `cd my-electron-app/electron-app/react-electron/`
+프론트엔드 폴더로 이동: `cd electron-app/react-electron/`
 
 필요한 라이브러리 설치: `npm i`
 
